@@ -1,0 +1,55 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+dns:
+  enable: true
+  ipv6: false
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - localhost.ptlogin2.qq.com
+
+proxies:
+  - name: "233boy-reality-136.0.197.99"
+    type: vless
+    server: 136.0.197.99
+    port: 49520
+    uuid: ca4cb252-3fcb-4937-9d08-c39683e46e42
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: www.ebay.com
+    reality-opts:
+      public-key: c4S7RKiXGJElV2F5_cPCUc_NDZzjpcPHTEs-OwO6A2c
+    client-fingerprint: chrome
+
+proxy-groups:
+  - name: "Proxy"
+    type: select
+    proxies:
+      - 233boy-reality-136.0.197.99
+      - DIRECT
+
+  - name: "Auto"
+    type: url-test
+    proxies:
+      - 233boy-reality-136.0.197.99
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+
+rules:
+  - DOMAIN-SUFFIX,google.com,Proxy
+  - DOMAIN-SUFFIX,github.com,Proxy
+  - DOMAIN-SUFFIX,youtube.com,Proxy
+  - DOMAIN-SUFFIX,twitter.com,Proxy
+  - DOMAIN-SUFFIX,facebook.com,Proxy
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
