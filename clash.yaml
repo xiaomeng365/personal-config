@@ -17,32 +17,31 @@ dns:
     - localhost.ptlogin2.qq.com
 
 proxies:
-  - name: "MyNode"
+  - name: "233boy-reality-136.0.197.99"
     type: vless
-    server: YOUR_SERVER_IP
-    port: 443
-    uuid: YOUR_UUID
+    server: 136.0.197.99
+    port: 49520
+    uuid: ca4cb252-3fcb-4937-9d08-c39683e46e42
     network: tcp
     tls: true
     udp: true
     flow: xtls-rprx-vision
-    servername: YOUR_SNI
+    servername: www.ebay.com
     reality-opts:
-      public-key: YOUR_PUBLIC_KEY
-      short-id: YOUR_SHORT_ID
-    client-fingerprint: random
+      public-key: c4S7RKiXGJElV2F5_cPCUc_NDZzjpcPHTEs-OwO6A2c
+    client-fingerprint: chrome
 
 proxy-groups:
   - name: "Proxy"
     type: select
     proxies:
-      - MyNode
+      - 233boy-reality-136.0.197.99
       - DIRECT
 
   - name: "Auto"
     type: url-test
     proxies:
-      - MyNode
+      - 233boy-reality-136.0.197.99
     url: "http://www.gstatic.com/generate_204"
     interval: 300
 
